@@ -1,0 +1,10 @@
+# Игнорируем автосохранения Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Игнорируем кэш Python
+__pycache__/
+*.pyc
+
+# Игнорируем виртуальные окружения (если будут)
+venv/
+.venv/
