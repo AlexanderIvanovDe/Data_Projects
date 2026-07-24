@@ -1,15 +1,18 @@
-# 1. Берем готовый официальный легкий образ с Python 3.10
+# 1. Легкий Python
 FROM python:3.10-slim
 
-# 2. Задаем рабочую директорию внутри контейнера
+# 2. Рабочая папка
 WORKDIR /app
 
-# 3. Копируем файл со списками библиотек и устанавливаем их
+# 3. Установка библиотек
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 4. Копируем остальные файлы проекта (скрипты и базу данных)
+# 4. Копируем файлы
 COPY . .
 
-# 5. Команда по умолчанию при запуске контейнера
-CMD ["python", "dataloader.py"]
+# 5. Открываем порт 8888 наружу
+EXPOSE 8888
+
+# 6. Запускаем Jupyter Notebook без пароля и токенов для локальной разработки
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
